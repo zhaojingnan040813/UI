@@ -1,5 +1,5 @@
 /**
- * 食养智脑 · 公共脚本
+ * 智能体质膳食推荐系统 · 公共脚本
  * Common Scripts
  */
 
@@ -101,7 +101,7 @@ const Utils = {
     // 节流
     throttle(func, limit) {
         let inThrottle;
-        return function(...args) {
+        return function (...args) {
             if (!inThrottle) {
                 func.apply(this, args);
                 inThrottle = true;

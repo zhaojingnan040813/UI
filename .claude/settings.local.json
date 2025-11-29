@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Skill(frontend-design)"
+      "Skill(frontend-design)",
+      "Bash(npm create:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(node ./node_modules/tailwindcss/lib/cli.js:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []

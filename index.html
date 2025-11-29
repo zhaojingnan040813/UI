@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>食养智脑 · 体质数字孪生</title>
+    <title>智能体质膳食推荐系统 · 体质数字孪生</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- 背景纹理层 -->
     <div class="bg-texture"></div>
@@ -18,7 +22,7 @@
     <header class="header">
         <div class="logo">
             <span class="logo-icon">養</span>
-            <span class="logo-text">食养智脑</span>
+            <span class="logo-text">智能体质膳食推荐系统</span>
         </div>
         <nav class="nav">
             <a href="./index.html" class="nav-item active">体质诊断</a>
@@ -77,30 +81,33 @@
                             <stop offset="100%" style="stop-color:#C84B31;stop-opacity:0" />
                         </radialGradient>
                         <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feGaussianBlur stdDeviation="3" result="blur" />
                             <feMerge>
-                                <feMergeNode in="blur"/>
-                                <feMergeNode in="SourceGraphic"/>
+                                <feMergeNode in="blur" />
+                                <feMergeNode in="SourceGraphic" />
                             </feMerge>
                         </filter>
                     </defs>
 
                     <!-- 经络线条 -->
                     <g class="meridians" opacity="0.3">
-                        <path class="meridian" d="M100,50 L100,350" stroke="url(#bodyGlow)" stroke-width="1" fill="none"/>
-                        <path class="meridian" d="M80,80 C60,120 55,200 70,280" stroke="url(#bodyGlow)" stroke-width="0.5" fill="none"/>
-                        <path class="meridian" d="M120,80 C140,120 145,200 130,280" stroke="url(#bodyGlow)" stroke-width="0.5" fill="none"/>
+                        <path class="meridian" d="M100,50 L100,350" stroke="url(#bodyGlow)" stroke-width="1"
+                            fill="none" />
+                        <path class="meridian" d="M80,80 C60,120 55,200 70,280" stroke="url(#bodyGlow)"
+                            stroke-width="0.5" fill="none" />
+                        <path class="meridian" d="M120,80 C140,120 145,200 130,280" stroke="url(#bodyGlow)"
+                            stroke-width="0.5" fill="none" />
                     </g>
 
                     <!-- 人体轮廓 -->
                     <g class="body-outline" filter="url(#glow)">
                         <!-- 头部 -->
-                        <ellipse class="body-part head" cx="100" cy="45" rx="28" ry="35"
-                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                        <ellipse class="body-part head" cx="100" cy="45" rx="28" ry="35" fill="none"
+                            stroke="var(--primary)" stroke-width="1.5" opacity="0.6" />
 
                         <!-- 颈部 -->
-                        <path class="body-part neck" d="M90,78 L90,95 L110,95 L110,78"
-                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                        <path class="body-part neck" d="M90,78 L90,95 L110,95 L110,78" fill="none"
+                            stroke="var(--primary)" stroke-width="1.5" opacity="0.6" />
 
                         <!-- 躯干 -->
                         <path class="body-part torso" d="M70,95
@@ -108,63 +115,63 @@
                             C55,210 60,250 75,280
                             L125,280
                             C140,250 145,210 145,170
-                            C145,130 140,100 130,95 Z"
-                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                            C145,130 140,100 130,95 Z" fill="none" stroke="var(--primary)" stroke-width="1.5"
+                            opacity="0.6" />
 
                         <!-- 左臂 -->
                         <path class="body-part arm-left" d="M55,105
                             C35,120 25,160 20,200
-                            C18,220 22,240 30,250"
-                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                            C18,220 22,240 30,250" fill="none" stroke="var(--primary)" stroke-width="1.5"
+                            opacity="0.6" />
 
                         <!-- 右臂 -->
                         <path class="body-part arm-right" d="M145,105
                             C165,120 175,160 180,200
-                            C182,220 178,240 170,250"
-                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                            C182,220 178,240 170,250" fill="none" stroke="var(--primary)" stroke-width="1.5"
+                            opacity="0.6" />
 
                         <!-- 左腿 -->
                         <path class="body-part leg-left" d="M75,280
-                            C70,310 65,350 60,390"
-                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                            C70,310 65,350 60,390" fill="none" stroke="var(--primary)" stroke-width="1.5"
+                            opacity="0.6" />
 
                         <!-- 右腿 -->
                         <path class="body-part leg-right" d="M125,280
-                            C130,310 135,350 140,390"
-                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                            C130,310 135,350 140,390" fill="none" stroke="var(--primary)" stroke-width="1.5"
+                            opacity="0.6" />
                     </g>
 
                     <!-- 穴位点 -->
                     <g class="acupoints">
-                        <circle class="acupoint" cx="100" cy="45" r="3" data-point="百会"/>
-                        <circle class="acupoint" cx="100" cy="140" r="3" data-point="膻中"/>
-                        <circle class="acupoint" cx="100" cy="190" r="3" data-point="中脘"/>
-                        <circle class="acupoint" cx="100" cy="240" r="3" data-point="气海"/>
-                        <circle class="acupoint" cx="30" cy="250" r="2" data-point="合谷"/>
-                        <circle class="acupoint" cx="170" cy="250" r="2" data-point="合谷"/>
-                        <circle class="acupoint" cx="60" cy="390" r="2" data-point="涌泉"/>
-                        <circle class="acupoint" cx="140" cy="390" r="2" data-point="涌泉"/>
+                        <circle class="acupoint" cx="100" cy="45" r="3" data-point="百会" />
+                        <circle class="acupoint" cx="100" cy="140" r="3" data-point="膻中" />
+                        <circle class="acupoint" cx="100" cy="190" r="3" data-point="中脘" />
+                        <circle class="acupoint" cx="100" cy="240" r="3" data-point="气海" />
+                        <circle class="acupoint" cx="30" cy="250" r="2" data-point="合谷" />
+                        <circle class="acupoint" cx="170" cy="250" r="2" data-point="合谷" />
+                        <circle class="acupoint" cx="60" cy="390" r="2" data-point="涌泉" />
+                        <circle class="acupoint" cx="140" cy="390" r="2" data-point="涌泉" />
                     </g>
 
                     <!-- 体质光效层 -->
                     <g class="constitution-effects">
                         <!-- 寒气效果 (阳虚/气虚) -->
-                        <ellipse class="cold-effect belly-cold" cx="100" cy="200" rx="35" ry="40"
-                            fill="url(#coldGlow)" opacity="0"/>
-                        <ellipse class="cold-effect hands-cold-l" cx="30" cy="250" rx="15" ry="20"
-                            fill="url(#coldGlow)" opacity="0"/>
+                        <ellipse class="cold-effect belly-cold" cx="100" cy="200" rx="35" ry="40" fill="url(#coldGlow)"
+                            opacity="0" />
+                        <ellipse class="cold-effect hands-cold-l" cx="30" cy="250" rx="15" ry="20" fill="url(#coldGlow)"
+                            opacity="0" />
                         <ellipse class="cold-effect hands-cold-r" cx="170" cy="250" rx="15" ry="20"
-                            fill="url(#coldGlow)" opacity="0"/>
-                        <ellipse class="cold-effect feet-cold-l" cx="60" cy="385" rx="15" ry="20"
-                            fill="url(#coldGlow)" opacity="0"/>
-                        <ellipse class="cold-effect feet-cold-r" cx="140" cy="385" rx="15" ry="20"
-                            fill="url(#coldGlow)" opacity="0"/>
+                            fill="url(#coldGlow)" opacity="0" />
+                        <ellipse class="cold-effect feet-cold-l" cx="60" cy="385" rx="15" ry="20" fill="url(#coldGlow)"
+                            opacity="0" />
+                        <ellipse class="cold-effect feet-cold-r" cx="140" cy="385" rx="15" ry="20" fill="url(#coldGlow)"
+                            opacity="0" />
 
                         <!-- 热气效果 (阴虚/湿热) -->
-                        <ellipse class="hot-effect head-hot" cx="100" cy="45" rx="35" ry="40"
-                            fill="url(#hotGlow)" opacity="0"/>
-                        <ellipse class="hot-effect stomach-hot" cx="100" cy="170" rx="30" ry="35"
-                            fill="url(#hotGlow)" opacity="0"/>
+                        <ellipse class="hot-effect head-hot" cx="100" cy="45" rx="35" ry="40" fill="url(#hotGlow)"
+                            opacity="0" />
+                        <ellipse class="hot-effect stomach-hot" cx="100" cy="170" rx="30" ry="35" fill="url(#hotGlow)"
+                            opacity="0" />
                     </g>
                 </svg>
 
@@ -214,7 +221,7 @@
                         <div class="message assistant">
                             <div class="message-avatar">養</div>
                             <div class="message-content">
-                                <p>您好，我是食养智脑。</p>
+                                <p>您好，我是智能体质膳食推荐系统。</p>
                                 <p>接下来我将通过几个问题了解您的体质状况，请根据您近期的真实感受作答。</p>
                             </div>
                         </div>
@@ -234,8 +241,9 @@
                     <div class="chat-input-area">
                         <input type="text" class="chat-input" placeholder="输入您的回答，或选择上方选项...">
                         <button class="send-btn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z" />
                             </svg>
                         </button>
                     </div>
@@ -346,11 +354,12 @@
         <button class="next-btn" id="nextBtn">
             <span>下一步：设置口味偏好</span>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M5 12h14M12 5l7 7-7 7"/>
+                <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
         </button>
     </footer>
 
     <script src="script.js"></script>
 </body>
+
 </html>
