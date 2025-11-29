@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食养智脑 · 口味调优</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- 背景纹理层 -->
+    <div class="bg-texture"></div>
+    <div class="bg-ink-wash"></div>
+
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">養</span>
+            <span class="logo-text">食养智脑</span>
+        </div>
+        <nav class="nav">
+            <a href="../../index.html" class="nav-item">体质诊断</a>
+            <a href="./index.html" class="nav-item active">口味调优</a>
+            <a href="../wisdom-dashboard/index.html" class="nav-item">智膳推荐</a>
+        </nav>
+        <div class="header-right">
+            <div class="user-constitution" id="userConstitution">
+                <span class="constitution-icon">☯</span>
+                <span class="constitution-name">平和质</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 页面标题 -->
+        <div class="page-header">
+            <h1 class="page-title">味蕾与场景调优</h1>
+            <p class="page-subtitle">Preference Tuner · 精准匹配您的口味偏好</p>
+        </div>
+
+        <!-- 瀑布流卡片布局 -->
+        <div class="preference-grid">
+            <!-- 五味滑块区域 -->
+            <section class="pref-card flavor-section">
+                <div class="card-header">
+                    <div class="card-icon">🎨</div>
+                    <div class="card-title-group">
+                        <h2>五味调和</h2>
+                        <p>调整您对五味的接受程度</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <!-- 酸 -->
+                    <div class="flavor-slider" data-flavor="sour">
+                        <div class="flavor-header">
+                            <span class="flavor-icon" style="--flavor-color: var(--flavor-sour)">酸</span>
+                            <span class="flavor-name">酸味</span>
+                            <span class="flavor-value">适中</span>
+                        </div>
+                        <div class="slider-track">
+                            <input type="range" min="0" max="4" value="2" class="flavor-range">
+                            <div class="slider-labels">
+                                <span>不喜欢</span>
+                                <span>微酸</span>
+                                <span>适中</span>
+                                <span>喜酸</span>
+                                <span>嗜酸</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 甜 -->
+                    <div class="flavor-slider" data-flavor="sweet">
+                        <div class="flavor-header">
+                            <span class="flavor-icon" style="--flavor-color: var(--flavor-sweet)">甜</span>
+                            <span class="flavor-name">甜味</span>
+                            <span class="flavor-value">适中</span>
+                        </div>
+                        <div class="slider-track">
+                            <input type="range" min="0" max="4" value="2" class="flavor-range">
+                            <div class="slider-labels">
+                                <span>不喜欢</span>
+                                <span>微甜</span>
+                                <span>适中</span>
+                                <span>喜甜</span>
+                                <span>嗜甜</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 苦 -->
+                    <div class="flavor-slider" data-flavor="bitter">
+                        <div class="flavor-header">
+                            <span class="flavor-icon" style="--flavor-color: var(--flavor-bitter)">苦</span>
+                            <span class="flavor-name">苦味</span>
+                            <span class="flavor-value">适中</span>
+                        </div>
+                        <div class="slider-track">
+                            <input type="range" min="0" max="4" value="2" class="flavor-range">
+                            <div class="slider-labels">
+                                <span>不喜欢</span>
+                                <span>微苦</span>
+                                <span>适中</span>
+                                <span>喜苦</span>
+                                <span>嗜苦</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 辣 -->
+                    <div class="flavor-slider" data-flavor="spicy">
+                        <div class="flavor-header">
+                            <span class="flavor-icon" style="--flavor-color: var(--flavor-spicy)">辣</span>
+                            <span class="flavor-name">辣味</span>
+                            <span class="flavor-value">适中</span>
+                        </div>
+                        <div class="slider-track">
+                            <input type="range" min="0" max="4" value="2" class="flavor-range">
+                            <div class="slider-labels">
+                                <span>不吃辣</span>
+                                <span>微辣</span>
+                                <span>中辣</span>
+                                <span>重辣</span>
+                                <span>变态辣</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 咸 -->
+                    <div class="flavor-slider" data-flavor="salty">
+                        <div class="flavor-header">
+                            <span class="flavor-icon" style="--flavor-color: var(--flavor-salty)">咸</span>
+                            <span class="flavor-name">咸味</span>
+                            <span class="flavor-value">适中</span>
+                        </div>
+                        <div class="slider-track">
+                            <input type="range" min="0" max="4" value="2" class="flavor-range">
+                            <div class="slider-labels">
+                                <span>清淡</span>
+                                <span>微咸</span>
+                                <span>适中</span>
+                                <span>偏咸</span>
+                                <span>重口</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 禁忌标签云 -->
+            <section class="pref-card exclusion-section">
+                <div class="card-header">
+                    <div class="card-icon">🚫</div>
+                    <div class="card-title-group">
+                        <h2>饮食禁忌</h2>
+                        <p>选择您需要避免的食材</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="exclusion-categories">
+                        <!-- 过敏源 -->
+                        <div class="category-group">
+                            <h3 class="category-title">常见过敏源</h3>
+                            <div class="tag-cloud">
+                                <button class="exclusion-tag" data-item="seafood">
+                                    <span class="tag-icon">🦐</span>
+                                    <span>海鲜</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="shellfish">
+                                    <span class="tag-icon">🦪</span>
+                                    <span>贝类</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="nuts">
+                                    <span class="tag-icon">🥜</span>
+                                    <span>坚果</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="eggs">
+                                    <span class="tag-icon">🥚</span>
+                                    <span>鸡蛋</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="milk">
+                                    <span class="tag-icon">🥛</span>
+                                    <span>牛奶</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="soy">
+                                    <span class="tag-icon">🫘</span>
+                                    <span>大豆</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="wheat">
+                                    <span class="tag-icon">🌾</span>
+                                    <span>小麦</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 食物不耐受 -->
+                        <div class="category-group">
+                            <h3 class="category-title">食物不耐受</h3>
+                            <div class="tag-cloud">
+                                <button class="exclusion-tag" data-item="lactose">
+                                    <span class="tag-icon">🧈</span>
+                                    <span>乳糖不耐</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="gluten">
+                                    <span class="tag-icon">🍞</span>
+                                    <span>麸质不耐</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="fructose">
+                                    <span class="tag-icon">🍎</span>
+                                    <span>果糖不耐</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 饮食偏好 -->
+                        <div class="category-group">
+                            <h3 class="category-title">个人偏好</h3>
+                            <div class="tag-cloud">
+                                <button class="exclusion-tag" data-item="cilantro">
+                                    <span class="tag-icon">🌿</span>
+                                    <span>香菜</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="celery">
+                                    <span class="tag-icon">🥬</span>
+                                    <span>芹菜</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="onion">
+                                    <span class="tag-icon">🧅</span>
+                                    <span>洋葱</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="garlic">
+                                    <span class="tag-icon">🧄</span>
+                                    <span>大蒜</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="ginger">
+                                    <span class="tag-icon">🫚</span>
+                                    <span>生姜</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="fungus">
+                                    <span class="tag-icon">🍄</span>
+                                    <span>菌类</span>
+                                </button>
+                                <button class="exclusion-tag" data-item="innards">
+                                    <span class="tag-icon">🫀</span>
+                                    <span>内脏</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 饮食方式 -->
+                        <div class="category-group">
+                            <h3 class="category-title">饮食方式</h3>
+                            <div class="tag-cloud">
+                                <button class="exclusion-tag special" data-item="vegetarian">
+                                    <span class="tag-icon">🥗</span>
+                                    <span>素食主义</span>
+                                </button>
+                                <button class="exclusion-tag special" data-item="vegan">
+                                    <span class="tag-icon">🌱</span>
+                                    <span>纯素食</span>
+                                </button>
+                                <button class="exclusion-tag special" data-item="halal">
+                                    <span class="tag-icon">☪</span>
+                                    <span>清真</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 自定义添加 -->
+                    <div class="custom-exclusion">
+                        <input type="text" class="input" placeholder="添加其他禁忌食材..." id="customExclusion">
+                        <button class="btn btn-outline" id="addCustomBtn">添加</button>
+                    </div>
+
+                    <!-- 已选禁忌 -->
+                    <div class="selected-exclusions" id="selectedExclusions">
+                        <span class="selected-label">已选禁忌：</span>
+                        <div class="selected-tags" id="selectedTags">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 此时此刻状态 -->
+            <section class="pref-card context-section">
+                <div class="card-header">
+                    <div class="card-icon">⏰</div>
+                    <div class="card-title-group">
+                        <h2>此时此刻</h2>
+                        <p>当前特殊状态会影响推荐结果</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="context-toggles">
+                        <div class="context-item" data-context="menstrual">
+                            <div class="context-info">
+                                <span class="context-icon">🌸</span>
+                                <div class="context-text">
+                                    <span class="context-name">生理期</span>
+                                    <span class="context-desc">将过滤寒凉食物</span>
+                                </div>
+                            </div>
+                            <button class="toggle" data-active="false"></button>
+                        </div>
+
+                        <div class="context-item" data-context="stayup">
+                            <div class="context-info">
+                                <span class="context-icon">🌙</span>
+                                <div class="context-text">
+                                    <span class="context-name">熬夜后</span>
+                                    <span class="context-desc">推荐滋阴润燥食材</span>
+                                </div>
+                            </div>
+                            <button class="toggle" data-active="false"></button>
+                        </div>
+
+                        <div class="context-item" data-context="cold">
+                            <div class="context-info">
+                                <span class="context-icon">🤧</span>
+                                <div class="context-text">
+                                    <span class="context-name">感冒中</span>
+                                    <span class="context-desc">推荐温和易消化食物</span>
+                                </div>
+                            </div>
+                            <button class="toggle" data-active="false"></button>
+                        </div>
+
+                        <div class="context-item" data-context="exercise">
+                            <div class="context-info">
+                                <span class="context-icon">💪</span>
+                                <div class="context-text">
+                                    <span class="context-name">运动后</span>
+                                    <span class="context-desc">补充蛋白质与能量</span>
+                                </div>
+                            </div>
+                            <button class="toggle" data-active="false"></button>
+                        </div>
+
+                        <div class="context-item" data-context="hangover">
+                            <div class="context-info">
+                                <span class="context-icon">🍺</span>
+                                <div class="context-text">
+                                    <span class="context-name">宿醉</span>
+                                    <span class="context-desc">推荐解酒护肝食材</span>
+                                </div>
+                            </div>
+                            <button class="toggle" data-active="false"></button>
+                        </div>
+
+                        <div class="context-item" data-context="pregnant">
+                            <div class="context-info">
+                                <span class="context-icon">🤰</span>
+                                <div class="context-text">
+                                    <span class="context-name">孕期</span>
+                                    <span class="context-desc">严格过滤禁忌食材</span>
+                                </div>
+                            </div>
+                            <button class="toggle" data-active="false"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 用餐场景 -->
+            <section class="pref-card scene-section">
+                <div class="card-header">
+                    <div class="card-icon">🍽</div>
+                    <div class="card-title-group">
+                        <h2>用餐场景</h2>
+                        <p>选择当前用餐时段和场景</p>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="scene-options">
+                        <!-- 用餐时段 -->
+                        <div class="scene-group">
+                            <h3 class="scene-title">用餐时段</h3>
+                            <div class="scene-buttons">
+                                <button class="scene-btn" data-scene="breakfast">
+                                    <span class="scene-icon">🌅</span>
+                                    <span>早餐</span>
+                                </button>
+                                <button class="scene-btn active" data-scene="lunch">
+                                    <span class="scene-icon">☀️</span>
+                                    <span>午餐</span>
+                                </button>
+                                <button class="scene-btn" data-scene="dinner">
+                                    <span class="scene-icon">🌆</span>
+                                    <span>晚餐</span>
+                                </button>
+                                <button class="scene-btn" data-scene="snack">
+                                    <span class="scene-icon">🌙</span>
+                                    <span>加餐</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 用餐人数 -->
+                        <div class="scene-group">
+                            <h3 class="scene-title">用餐人数</h3>
+                            <div class="scene-buttons">
+                                <button class="scene-btn active" data-people="1">
+                                    <span class="scene-icon">👤</span>
+                                    <span>独食</span>
+                                </button>
+                                <button class="scene-btn" data-people="2">
+                                    <span class="scene-icon">👥</span>
+                                    <span>二人</span>
+                                </button>
+                                <button class="scene-btn" data-people="family">
+                                    <span class="scene-icon">👨‍👩‍👧</span>
+                                    <span>家庭</span>
+                                </button>
+                                <button class="scene-btn" data-people="party">
+                                    <span class="scene-icon">🎉</span>
+                                    <span>聚餐</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 烹饪时间 -->
+                        <div class="scene-group">
+                            <h3 class="scene-title">烹饪时间</h3>
+                            <div class="scene-buttons">
+                                <button class="scene-btn" data-time="quick">
+                                    <span class="scene-icon">⚡</span>
+                                    <span>快手菜</span>
+                                    <span class="scene-meta">&lt;15分钟</span>
+                                </button>
+                                <button class="scene-btn active" data-time="normal">
+                                    <span class="scene-icon">⏱</span>
+                                    <span>常规</span>
+                                    <span class="scene-meta">15-45分钟</span>
+                                </button>
+                                <button class="scene-btn" data-time="slow">
+                                    <span class="scene-icon">🍲</span>
+                                    <span>慢炖</span>
+                                    <span class="scene-meta">&gt;1小时</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- 底部浮动栏 -->
+    <footer class="floating-footer">
+        <div class="footer-left">
+            <span class="step-indicator">
+                <span class="step completed">✓</span>
+                <span class="step-line completed"></span>
+                <span class="step active">2</span>
+                <span class="step-line"></span>
+                <span class="step">3</span>
+            </span>
+            <span class="step-text">口味调优</span>
+        </div>
+        <div class="footer-actions">
+            <a href="../../index.html" class="btn btn-outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                <span>上一步</span>
+            </a>
+            <button class="btn btn-gold btn-lg" id="nextBtn">
+                <span>获取智膳推荐</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </footer>
+
+    <!-- 状态提示浮层 -->
+    <div class="context-toast" id="contextToast">
+        <span class="toast-icon"></span>
+        <span class="toast-text"></span>
+    </div>
+
+    <script src="../../assets/js/common.js"></script>
+    <script src="./script.js"></script>
+</body>
+</html>

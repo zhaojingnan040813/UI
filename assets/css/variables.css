@@ -1,0 +1,141 @@
+/* =====================================================
+   食养智脑 · 设计系统变量
+   Design System Variables
+   ===================================================== */
+
+:root {
+    /* ===== 主色调 ===== */
+    --primary: #7BA8A8;           /* 汝窑青 - Ru Kiln Cyan */
+    --primary-light: #9DC5C5;
+    --primary-dark: #5A8787;
+    --primary-alpha-10: rgba(123, 168, 168, 0.1);
+    --primary-alpha-20: rgba(123, 168, 168, 0.2);
+
+    /* ===== 背景色 ===== */
+    --bg-paper: #F5F1E8;          /* 米宣纸色 - Rice Paper */
+    --bg-paper-dark: #E8E2D5;
+    --bg-paper-alpha: rgba(245, 241, 232, 0.95);
+    --bg-white: #FFFFFF;
+    --bg-white-alpha-70: rgba(255, 255, 255, 0.7);
+    --bg-white-alpha-50: rgba(255, 255, 255, 0.5);
+    --bg-ink: #2C2C2C;
+
+    /* ===== 功能色 - 寒/热 ===== */
+    --cold: #4A6FA5;              /* 靛蓝 - Indigo (寒性) */
+    --cold-light: #6B8FC5;
+    --cold-alpha-10: rgba(74, 111, 165, 0.1);
+    --hot: #C84B31;               /* 朱砂红 - Cinnabar (热性) */
+    --hot-light: #E86B51;
+    --hot-alpha-10: rgba(200, 75, 49, 0.1);
+
+    /* ===== 强调色 ===== */
+    --gold: #B8956B;              /* 鎏金色 - Muted Gold */
+    --gold-light: #D4B896;
+    --gold-alpha-10: rgba(184, 149, 107, 0.1);
+    --gold-alpha-20: rgba(184, 149, 107, 0.2);
+
+    /* ===== 语义色 ===== */
+    --success: #6B9B7A;
+    --warning: #D4A84B;
+    --error: #C84B31;
+    --info: #4A6FA5;
+
+    /* ===== 五味色系 ===== */
+    --flavor-sour: #9DC88D;       /* 酸 - 青绿 */
+    --flavor-sweet: #E8A87C;      /* 甜 - 蜜橙 */
+    --flavor-bitter: #8B7355;     /* 苦 - 焦褐 */
+    --flavor-spicy: #D94E4E;      /* 辣 - 赤红 */
+    --flavor-salty: #6B8FAD;      /* 咸 - 海蓝 */
+
+    /* ===== 中性色 ===== */
+    --text-primary: #2C2C2C;
+    --text-secondary: #666666;
+    --text-muted: #999999;
+    --text-light: #CCCCCC;
+    --text-inverse: #FFFFFF;
+
+    /* ===== 边框 ===== */
+    --border: rgba(123, 168, 168, 0.3);
+    --border-light: rgba(123, 168, 168, 0.15);
+    --border-white: rgba(255, 255, 255, 0.8);
+
+    /* ===== 阴影 ===== */
+    --shadow-xs: 0 1px 3px rgba(44, 44, 44, 0.04);
+    --shadow-sm: 0 2px 8px rgba(44, 44, 44, 0.06);
+    --shadow-md: 0 4px 20px rgba(44, 44, 44, 0.08);
+    --shadow-lg: 0 8px 40px rgba(44, 44, 44, 0.12);
+    --shadow-xl: 0 12px 60px rgba(44, 44, 44, 0.16);
+    --shadow-gold: 0 4px 20px rgba(184, 149, 107, 0.25);
+    --shadow-primary: 0 4px 20px rgba(123, 168, 168, 0.25);
+
+    /* ===== 圆角 ===== */
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-full: 9999px;
+
+    /* ===== 间距 ===== */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 20px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-10: 40px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* ===== 字体 ===== */
+    --font-serif: 'Noto Serif SC', 'Songti SC', serif;
+    --font-sans: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    /* ===== 字号 ===== */
+    --text-xs: 0.75rem;      /* 12px */
+    --text-sm: 0.875rem;     /* 14px */
+    --text-base: 1rem;       /* 16px */
+    --text-lg: 1.125rem;     /* 18px */
+    --text-xl: 1.25rem;      /* 20px */
+    --text-2xl: 1.5rem;      /* 24px */
+    --text-3xl: 1.875rem;    /* 30px */
+    --text-4xl: 2.25rem;     /* 36px */
+
+    /* ===== 行高 ===== */
+    --leading-tight: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+
+    /* ===== 动画 ===== */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s ease;
+    --transition-slow: 0.4s ease;
+    --transition-slower: 0.6s ease;
+
+    /* ===== 层级 ===== */
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+
+    /* ===== 布局 ===== */
+    --header-height: 70px;
+    --footer-height: 80px;
+    --sidebar-width: 280px;
+    --container-max: 1600px;
+}
+
+/* ===== 深色模式变量（预留） ===== */
+@media (prefers-color-scheme: dark) {
+    :root.auto-dark {
+        --bg-paper: #1A1A1A;
+        --bg-paper-dark: #252525;
+        --text-primary: #E8E8E8;
+        --text-secondary: #AAAAAA;
+    }
+}

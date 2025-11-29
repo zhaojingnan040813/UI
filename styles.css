@@ -1,0 +1,1019 @@
+/* =====================================================
+   食养智脑 · 新中式禅意设计系统
+   Design System: Neo-Chinese Zen
+   ===================================================== */
+
+/* CSS Variables - 新中式配色系统 */
+:root {
+    /* 主色调 */
+    --primary: #7BA8A8;           /* 汝窑青 - Ru Kiln Cyan */
+    --primary-light: #9DC5C5;
+    --primary-dark: #5A8787;
+
+    /* 背景色 */
+    --bg-paper: #F5F1E8;          /* 米宣纸色 - Rice Paper */
+    --bg-paper-dark: #E8E2D5;
+    --bg-ink: #2C2C2C;
+
+    /* 功能色 - 寒/热 */
+    --cold: #4A6FA5;              /* 靛蓝 - Indigo (寒性) */
+    --cold-light: #6B8FC5;
+    --hot: #C84B31;               /* 朱砂红 - Cinnabar (热性) */
+    --hot-light: #E86B51;
+
+    /* 强调色 */
+    --gold: #B8956B;              /* 鎏金色 - Muted Gold */
+    --gold-light: #D4B896;
+
+    /* 中性色 */
+    --text-primary: #2C2C2C;
+    --text-secondary: #666;
+    --text-muted: #999;
+    --border: rgba(123, 168, 168, 0.3);
+
+    /* 阴影 */
+    --shadow-sm: 0 2px 8px rgba(44, 44, 44, 0.06);
+    --shadow-md: 0 4px 20px rgba(44, 44, 44, 0.08);
+    --shadow-lg: 0 8px 40px rgba(44, 44, 44, 0.12);
+
+    /* 动画时间 */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Reset & Base */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-paper);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* 背景纹理层 */
+.bg-texture {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+    background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
+}
+
+.bg-ink-wash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    background:
+        radial-gradient(ellipse at 20% 20%, rgba(123, 168, 168, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 80%, rgba(184, 149, 107, 0.06) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 100%, rgba(74, 111, 165, 0.04) 0%, transparent 40%);
+}
+
+/* =====================================================
+   Header - 顶部导航
+   ===================================================== */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: linear-gradient(to bottom,
+        rgba(245, 241, 232, 0.98),
+        rgba(245, 241, 232, 0.95));
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.logo-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.1em;
+}
+
+.nav {
+    display: flex;
+    gap: 8px;
+}
+
+.nav-item {
+    padding: 10px 20px;
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: var(--transition-fast);
+    position: relative;
+}
+
+.nav-item:hover {
+    color: var(--primary-dark);
+    background: rgba(123, 168, 168, 0.08);
+}
+
+.nav-item.active {
+    color: var(--primary-dark);
+    background: rgba(123, 168, 168, 0.12);
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 1px;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+.solar-term {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: rgba(184, 149, 107, 0.1);
+    border: 1px solid rgba(184, 149, 107, 0.2);
+    border-radius: 20px;
+    font-size: 0.875rem;
+    color: var(--gold);
+}
+
+.term-icon {
+    font-size: 1rem;
+}
+
+/* =====================================================
+   Main Content - 主内容区
+   ===================================================== */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    padding: 100px 40px 120px;
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* =====================================================
+   Body Scanner - 人体模型区
+   ===================================================== */
+.body-scanner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 40px;
+    background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.4));
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+}
+
+.scanner-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.scanner-title h2 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+}
+
+.scanner-title .subtitle {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+}
+
+.body-model-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 背景圆环 */
+.model-bg-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    animation: ring-rotate 60s linear infinite;
+}
+
+.ring-outer {
+    width: 95%;
+    height: 95%;
+    border-style: dashed;
+    animation-direction: reverse;
+}
+
+.ring-middle {
+    width: 80%;
+    height: 80%;
+    border-color: rgba(123, 168, 168, 0.2);
+}
+
+.ring-inner {
+    width: 65%;
+    height: 65%;
+    border-style: dotted;
+    border-color: rgba(184, 149, 107, 0.2);
+}
+
+@keyframes ring-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 八卦装饰 */
+.bagua-decoration {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: bagua-rotate 120s linear infinite reverse;
+}
+
+.trigram {
+    position: absolute;
+    font-size: 1.2rem;
+    color: var(--primary);
+    opacity: 0.25;
+    transition: var(--transition-normal);
+}
+
+.trigram.t1 { top: 5%; left: 50%; transform: translateX(-50%); }
+.trigram.t2 { top: 15%; right: 15%; }
+.trigram.t3 { top: 50%; right: 5%; transform: translateY(-50%); }
+.trigram.t4 { bottom: 15%; right: 15%; }
+.trigram.t5 { bottom: 5%; left: 50%; transform: translateX(-50%); }
+.trigram.t6 { bottom: 15%; left: 15%; }
+.trigram.t7 { top: 50%; left: 5%; transform: translateY(-50%); }
+.trigram.t8 { top: 15%; left: 15%; }
+
+@keyframes bagua-rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 人体SVG */
+.body-svg {
+    width: 55%;
+    height: auto;
+    position: relative;
+    z-index: 2;
+}
+
+.body-outline {
+    transition: var(--transition-slow);
+}
+
+.body-part {
+    transition: var(--transition-normal);
+}
+
+/* 穴位 */
+.acupoint {
+    fill: var(--primary);
+    opacity: 0.5;
+    transition: var(--transition-fast);
+    cursor: pointer;
+}
+
+.acupoint:hover {
+    opacity: 1;
+    r: 5;
+}
+
+/* 经络动画 */
+.meridian {
+    stroke-dasharray: 5 10;
+    animation: meridian-flow 3s linear infinite;
+}
+
+@keyframes meridian-flow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -30; }
+}
+
+/* 体质效果 */
+.cold-effect, .hot-effect {
+    transition: opacity 0.8s ease;
+}
+
+.cold-effect.active {
+    opacity: 0.6;
+    animation: pulse-cold 2s ease-in-out infinite;
+}
+
+.hot-effect.active {
+    opacity: 0.6;
+    animation: pulse-hot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-cold {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.05); }
+}
+
+@keyframes pulse-hot {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.08); }
+}
+
+/* 体质指示器 */
+.constitution-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 200px;
+}
+
+.indicator-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.indicator-label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    width: 30px;
+    flex-shrink: 0;
+}
+
+.indicator-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 3px;
+    overflow: hidden;
+    display: flex;
+}
+
+.bar-fill {
+    height: 100%;
+    transition: width 0.5s ease;
+}
+
+.bar-fill.yin {
+    background: linear-gradient(90deg, var(--cold), var(--cold-light));
+}
+
+.bar-fill.yang {
+    background: linear-gradient(90deg, var(--hot-light), var(--hot));
+}
+
+.bar-fill.qi {
+    background: linear-gradient(90deg, var(--primary-dark), var(--primary-light));
+}
+
+/* 当前体质显示 */
+.current-constitution {
+    margin-top: 30px;
+    text-align: center;
+    padding: 16px 32px;
+    background: rgba(123, 168, 168, 0.08);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.current-constitution .label {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.current-constitution .value {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+}
+
+/* =====================================================
+   Operation Panel - 操作面板
+   ===================================================== */
+.operation-panel {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(145deg,
+        rgba(255, 255, 255, 0.8),
+        rgba(255, 255, 255, 0.5));
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 24px;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+}
+
+/* Tab切换 */
+.tab-switcher {
+    display: flex;
+    padding: 20px 20px 0;
+    gap: 8px;
+}
+
+.tab-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 12px 12px 0 0;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.tab-btn:hover {
+    color: var(--text-primary);
+    background: rgba(123, 168, 168, 0.05);
+}
+
+.tab-btn.active {
+    color: var(--primary-dark);
+    background: rgba(255, 255, 255, 0.8);
+    border-color: var(--border);
+    border-bottom-color: transparent;
+}
+
+.tab-icon {
+    font-size: 1.1rem;
+}
+
+/* Tab内容 */
+.tab-content {
+    display: none;
+    flex: 1;
+    padding: 20px;
+    animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* =====================================================
+   Chat Interface - AI问诊
+   ===================================================== */
+.chat-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 450px;
+}
+
+.message {
+    display: flex;
+    gap: 12px;
+    animation: messageSlide 0.4s ease;
+}
+
+@keyframes messageSlide {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user {
+    flex-direction: row-reverse;
+}
+
+.message-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Noto Serif SC', serif;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.message.assistant .message-avatar {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+}
+
+.message.user .message-avatar {
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    color: white;
+}
+
+.message-content {
+    max-width: 80%;
+    padding: 14px 18px;
+    border-radius: 16px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.message.assistant .message-content {
+    background: white;
+    border: 1px solid var(--border);
+    border-bottom-left-radius: 4px;
+}
+
+.message.user .message-content {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.message-content p {
+    margin-bottom: 8px;
+}
+
+.message-content p:last-child {
+    margin-bottom: 0;
+}
+
+/* 快捷回复 */
+.quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.quick-reply {
+    padding: 8px 14px;
+    background: rgba(123, 168, 168, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.quick-reply:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: translateY(-1px);
+}
+
+/* 输入区域 */
+.chat-input-area {
+    display: flex;
+    gap: 12px;
+    padding: 16px 20px;
+    background: white;
+    border-top: 1px solid var(--border);
+}
+
+.chat-input {
+    flex: 1;
+    padding: 12px 16px;
+    background: var(--bg-paper);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: var(--transition-fast);
+}
+
+.chat-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(123, 168, 168, 0.1);
+}
+
+.chat-input::placeholder {
+    color: var(--text-muted);
+}
+
+.send-btn {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    border-radius: 12px;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.send-btn:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+}
+
+/* =====================================================
+   Constitution Grid - 九宫格体质选择
+   ===================================================== */
+.constitution-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    padding: 8px;
+}
+
+.constitution-card {
+    padding: 20px 16px;
+    background: white;
+    border: 2px solid transparent;
+    border-radius: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.constitution-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, transparent, rgba(123, 168, 168, 0.05));
+    opacity: 0;
+    transition: var(--transition-normal);
+}
+
+.constitution-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--border);
+}
+
+.constitution-card:hover::before {
+    opacity: 1;
+}
+
+.constitution-card.selected {
+    border-color: var(--primary);
+    background: linear-gradient(135deg, white, rgba(123, 168, 168, 0.08));
+    box-shadow: 0 4px 20px rgba(123, 168, 168, 0.2);
+}
+
+.constitution-card.selected .card-icon {
+    transform: scale(1.1);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    display: block;
+    transition: var(--transition-normal);
+}
+
+.constitution-card h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.constitution-card p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+}
+
+.card-traits {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+}
+
+.card-traits span {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+    background: var(--bg-paper);
+    border-radius: 10px;
+    color: var(--text-muted);
+}
+
+/* =====================================================
+   Floating Footer - 底部浮动栏
+   ===================================================== */
+.floating-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    background: linear-gradient(to top,
+        rgba(245, 241, 232, 0.98),
+        rgba(245, 241, 232, 0.95));
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--border);
+    z-index: 100;
+}
+
+.footer-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.step-indicator {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.step {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(123, 168, 168, 0.1);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    transition: var(--transition-normal);
+}
+
+.step.active {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+}
+
+.step-line {
+    width: 24px;
+    height: 2px;
+    background: var(--border);
+}
+
+.step-text {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.next-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, var(--gold), var(--gold-light));
+    border: none;
+    border-radius: 12px;
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    transition: var(--transition-normal);
+    box-shadow: var(--shadow-md);
+}
+
+.next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(184, 149, 107, 0.3);
+}
+
+.next-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* =====================================================
+   Scrollbar Styling
+   ===================================================== */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-light);
+}
+
+/* =====================================================
+   Responsive Design
+   ===================================================== */
+@media (max-width: 1200px) {
+    .main-content {
+        gap: 30px;
+        padding: 90px 30px 110px;
+    }
+
+    .body-model-container {
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 24px;
+    }
+
+    .body-scanner {
+        padding: 30px;
+    }
+
+    .body-model-container {
+        max-width: 320px;
+    }
+
+    .constitution-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0 20px;
+        height: 60px;
+    }
+
+    .logo-text {
+        display: none;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    .main-content {
+        padding: 80px 16px 100px;
+    }
+
+    .body-scanner,
+    .operation-panel {
+        border-radius: 20px;
+    }
+
+    .constitution-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .floating-footer {
+        padding: 0 20px;
+        height: 70px;
+    }
+
+    .step-text {
+        display: none;
+    }
+
+    .next-btn {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+}
+
+/* =====================================================
+   Animation Classes
+   ===================================================== */
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease forwards;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 体质特效类 */
+.body-scanner[data-constitution="yang-deficiency"] .body-svg {
+    --glow-color: #4A6FA5;
+}
+
+.body-scanner[data-constitution="yin-deficiency"] .body-svg,
+.body-scanner[data-constitution="damp-heat"] .body-svg {
+    --glow-color: #C84B31;
+}
+
+.body-scanner[data-constitution="balanced"] .body-svg {
+    --glow-color: #7BA8A8;
+}

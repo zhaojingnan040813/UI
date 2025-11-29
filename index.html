@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食养智脑 · 体质数字孪生</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- 背景纹理层 -->
+    <div class="bg-texture"></div>
+    <div class="bg-ink-wash"></div>
+
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">養</span>
+            <span class="logo-text">食养智脑</span>
+        </div>
+        <nav class="nav">
+            <a href="./index.html" class="nav-item active">体质诊断</a>
+            <a href="./pages/preference-tuner/index.html" class="nav-item">口味调优</a>
+            <a href="./pages/wisdom-dashboard/index.html" class="nav-item">智膳推荐</a>
+        </nav>
+        <div class="header-right">
+            <span class="solar-term">
+                <span class="term-icon">◐</span>
+                <span>霜降 · 宜温补</span>
+            </span>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 左侧：人体模型可视化 -->
+        <section class="body-scanner">
+            <div class="scanner-title">
+                <h2>体质映像</h2>
+                <p class="subtitle">Digital Body Twin</p>
+            </div>
+
+            <div class="body-model-container">
+                <!-- 背景装饰圆环 -->
+                <div class="model-bg-ring ring-outer"></div>
+                <div class="model-bg-ring ring-middle"></div>
+                <div class="model-bg-ring ring-inner"></div>
+
+                <!-- 八卦装饰 -->
+                <div class="bagua-decoration">
+                    <span class="trigram t1">☰</span>
+                    <span class="trigram t2">☱</span>
+                    <span class="trigram t3">☲</span>
+                    <span class="trigram t4">☳</span>
+                    <span class="trigram t5">☴</span>
+                    <span class="trigram t6">☵</span>
+                    <span class="trigram t7">☶</span>
+                    <span class="trigram t8">☷</span>
+                </div>
+
+                <!-- 人体SVG -->
+                <svg class="body-svg" viewBox="0 0 200 400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <!-- 渐变定义 -->
+                        <radialGradient id="bodyGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:var(--glow-color, #7BA8A8);stop-opacity:0.6" />
+                            <stop offset="100%" style="stop-color:var(--glow-color, #7BA8A8);stop-opacity:0" />
+                        </radialGradient>
+                        <radialGradient id="coldGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#4A6FA5;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:#4A6FA5;stop-opacity:0" />
+                        </radialGradient>
+                        <radialGradient id="hotGlow" cx="50%" cy="50%" r="50%">
+                            <stop offset="0%" style="stop-color:#C84B31;stop-opacity:0.8" />
+                            <stop offset="100%" style="stop-color:#C84B31;stop-opacity:0" />
+                        </radialGradient>
+                        <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+                            <feGaussianBlur stdDeviation="3" result="blur"/>
+                            <feMerge>
+                                <feMergeNode in="blur"/>
+                                <feMergeNode in="SourceGraphic"/>
+                            </feMerge>
+                        </filter>
+                    </defs>
+
+                    <!-- 经络线条 -->
+                    <g class="meridians" opacity="0.3">
+                        <path class="meridian" d="M100,50 L100,350" stroke="url(#bodyGlow)" stroke-width="1" fill="none"/>
+                        <path class="meridian" d="M80,80 C60,120 55,200 70,280" stroke="url(#bodyGlow)" stroke-width="0.5" fill="none"/>
+                        <path class="meridian" d="M120,80 C140,120 145,200 130,280" stroke="url(#bodyGlow)" stroke-width="0.5" fill="none"/>
+                    </g>
+
+                    <!-- 人体轮廓 -->
+                    <g class="body-outline" filter="url(#glow)">
+                        <!-- 头部 -->
+                        <ellipse class="body-part head" cx="100" cy="45" rx="28" ry="35"
+                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+
+                        <!-- 颈部 -->
+                        <path class="body-part neck" d="M90,78 L90,95 L110,95 L110,78"
+                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+
+                        <!-- 躯干 -->
+                        <path class="body-part torso" d="M70,95
+                            C60,100 55,130 55,170
+                            C55,210 60,250 75,280
+                            L125,280
+                            C140,250 145,210 145,170
+                            C145,130 140,100 130,95 Z"
+                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+
+                        <!-- 左臂 -->
+                        <path class="body-part arm-left" d="M55,105
+                            C35,120 25,160 20,200
+                            C18,220 22,240 30,250"
+                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+
+                        <!-- 右臂 -->
+                        <path class="body-part arm-right" d="M145,105
+                            C165,120 175,160 180,200
+                            C182,220 178,240 170,250"
+                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+
+                        <!-- 左腿 -->
+                        <path class="body-part leg-left" d="M75,280
+                            C70,310 65,350 60,390"
+                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+
+                        <!-- 右腿 -->
+                        <path class="body-part leg-right" d="M125,280
+                            C130,310 135,350 140,390"
+                            fill="none" stroke="var(--primary)" stroke-width="1.5" opacity="0.6"/>
+                    </g>
+
+                    <!-- 穴位点 -->
+                    <g class="acupoints">
+                        <circle class="acupoint" cx="100" cy="45" r="3" data-point="百会"/>
+                        <circle class="acupoint" cx="100" cy="140" r="3" data-point="膻中"/>
+                        <circle class="acupoint" cx="100" cy="190" r="3" data-point="中脘"/>
+                        <circle class="acupoint" cx="100" cy="240" r="3" data-point="气海"/>
+                        <circle class="acupoint" cx="30" cy="250" r="2" data-point="合谷"/>
+                        <circle class="acupoint" cx="170" cy="250" r="2" data-point="合谷"/>
+                        <circle class="acupoint" cx="60" cy="390" r="2" data-point="涌泉"/>
+                        <circle class="acupoint" cx="140" cy="390" r="2" data-point="涌泉"/>
+                    </g>
+
+                    <!-- 体质光效层 -->
+                    <g class="constitution-effects">
+                        <!-- 寒气效果 (阳虚/气虚) -->
+                        <ellipse class="cold-effect belly-cold" cx="100" cy="200" rx="35" ry="40"
+                            fill="url(#coldGlow)" opacity="0"/>
+                        <ellipse class="cold-effect hands-cold-l" cx="30" cy="250" rx="15" ry="20"
+                            fill="url(#coldGlow)" opacity="0"/>
+                        <ellipse class="cold-effect hands-cold-r" cx="170" cy="250" rx="15" ry="20"
+                            fill="url(#coldGlow)" opacity="0"/>
+                        <ellipse class="cold-effect feet-cold-l" cx="60" cy="385" rx="15" ry="20"
+                            fill="url(#coldGlow)" opacity="0"/>
+                        <ellipse class="cold-effect feet-cold-r" cx="140" cy="385" rx="15" ry="20"
+                            fill="url(#coldGlow)" opacity="0"/>
+
+                        <!-- 热气效果 (阴虚/湿热) -->
+                        <ellipse class="hot-effect head-hot" cx="100" cy="45" rx="35" ry="40"
+                            fill="url(#hotGlow)" opacity="0"/>
+                        <ellipse class="hot-effect stomach-hot" cx="100" cy="170" rx="30" ry="35"
+                            fill="url(#hotGlow)" opacity="0"/>
+                    </g>
+                </svg>
+
+                <!-- 体质状态指示器 -->
+                <div class="constitution-indicator">
+                    <div class="indicator-item yin-yang">
+                        <span class="indicator-label">阴阳</span>
+                        <div class="indicator-bar">
+                            <div class="bar-fill yin" style="width: 50%"></div>
+                            <div class="bar-fill yang" style="width: 50%"></div>
+                        </div>
+                    </div>
+                    <div class="indicator-item qi-blood">
+                        <span class="indicator-label">气血</span>
+                        <div class="indicator-bar">
+                            <div class="bar-fill qi" style="width: 60%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 当前体质显示 -->
+            <div class="current-constitution">
+                <span class="label">当前体质</span>
+                <span class="value" id="currentConstitution">请选择体质</span>
+            </div>
+        </section>
+
+        <!-- 右侧：操作区域 -->
+        <section class="operation-panel">
+            <!-- Tab切换 -->
+            <div class="tab-switcher">
+                <button class="tab-btn active" data-tab="ai">
+                    <span class="tab-icon">🤖</span>
+                    <span>AI 问诊</span>
+                </button>
+                <button class="tab-btn" data-tab="manual">
+                    <span class="tab-icon">🎯</span>
+                    <span>手动选择</span>
+                </button>
+            </div>
+
+            <!-- AI问诊面板 -->
+            <div class="tab-content active" id="tab-ai">
+                <div class="chat-container">
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message assistant">
+                            <div class="message-avatar">養</div>
+                            <div class="message-content">
+                                <p>您好，我是食养智脑。</p>
+                                <p>接下来我将通过几个问题了解您的体质状况，请根据您近期的真实感受作答。</p>
+                            </div>
+                        </div>
+                        <div class="message assistant">
+                            <div class="message-avatar">養</div>
+                            <div class="message-content">
+                                <p>请问您最近的睡眠状况如何？</p>
+                                <div class="quick-replies">
+                                    <button class="quick-reply" data-reply="sleep-good">入睡快，睡眠深</button>
+                                    <button class="quick-reply" data-reply="sleep-light">睡眠较浅，易醒</button>
+                                    <button class="quick-reply" data-reply="sleep-hard">入睡困难，多梦</button>
+                                    <button class="quick-reply" data-reply="sleep-tired">睡很久仍感疲惫</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" placeholder="输入您的回答，或选择上方选项...">
+                        <button class="send-btn">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2L15 22L11 13L2 9L22 2Z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 手动选择面板 -->
+            <div class="tab-content" id="tab-manual">
+                <div class="constitution-grid">
+                    <div class="constitution-card" data-type="balanced">
+                        <div class="card-icon">☯</div>
+                        <h3>平和质</h3>
+                        <p>阴阳调和，气血充盈</p>
+                        <div class="card-traits">
+                            <span>精力充沛</span>
+                            <span>睡眠良好</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="qi-deficiency">
+                        <div class="card-icon">☁</div>
+                        <h3>气虚质</h3>
+                        <p>元气不足，疲乏气短</p>
+                        <div class="card-traits">
+                            <span>容易疲劳</span>
+                            <span>气短懒言</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="yang-deficiency">
+                        <div class="card-icon">❄</div>
+                        <h3>阳虚质</h3>
+                        <p>阳气不足，畏寒怕冷</p>
+                        <div class="card-traits">
+                            <span>手脚冰凉</span>
+                            <span>喜热饮食</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="yin-deficiency">
+                        <div class="card-icon">🔥</div>
+                        <h3>阴虚质</h3>
+                        <p>阴液亏少，虚热内生</p>
+                        <div class="card-traits">
+                            <span>口燥咽干</span>
+                            <span>手足心热</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="phlegm-dampness">
+                        <div class="card-icon">💧</div>
+                        <h3>痰湿质</h3>
+                        <p>痰湿凝聚，形体肥胖</p>
+                        <div class="card-traits">
+                            <span>体形偏胖</span>
+                            <span>口黏腻</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="damp-heat">
+                        <div class="card-icon">🌡</div>
+                        <h3>湿热质</h3>
+                        <p>湿热内蕴，面垢油光</p>
+                        <div class="card-traits">
+                            <span>面部油腻</span>
+                            <span>口苦口臭</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="blood-stasis">
+                        <div class="card-icon">🩸</div>
+                        <h3>血瘀质</h3>
+                        <p>血行不畅，肤色晦暗</p>
+                        <div class="card-traits">
+                            <span>肤色偏暗</span>
+                            <span>易生斑点</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="qi-stagnation">
+                        <div class="card-icon">🌀</div>
+                        <h3>气郁质</h3>
+                        <p>气机郁滞，情绪敏感</p>
+                        <div class="card-traits">
+                            <span>情绪波动</span>
+                            <span>多愁善感</span>
+                        </div>
+                    </div>
+                    <div class="constitution-card" data-type="special">
+                        <div class="card-icon">🌸</div>
+                        <h3>特禀质</h3>
+                        <p>先天特殊，易过敏</p>
+                        <div class="card-traits">
+                            <span>易过敏</span>
+                            <span>遗传性</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 底部浮动栏 -->
+    <footer class="floating-footer">
+        <div class="footer-left">
+            <span class="step-indicator">
+                <span class="step active">1</span>
+                <span class="step-line"></span>
+                <span class="step">2</span>
+                <span class="step-line"></span>
+                <span class="step">3</span>
+            </span>
+            <span class="step-text">体质诊断</span>
+        </div>
+        <button class="next-btn" id="nextBtn">
+            <span>下一步：设置口味偏好</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+        </button>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
