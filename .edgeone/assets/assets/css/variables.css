@@ -1,0 +1,108 @@
+/* =====================================================
+   中医九种体质调理系统 - 设计变量系统
+   Design System: Traditional Chinese Medicine Style
+   ===================================================== */
+
+:root {
+    /* ===== 主色调 - 中医药典雅配色 ===== */
+    --primary: #8B4513;           /* 药褐色 - Medicine Brown */
+    --primary-light: #A0522D;     /* 浅药褐 */
+    --primary-dark: #654321;      /* 深药褐 */
+    
+    --accent: #B8860B;            /* 金药色 - Golden Medicine */
+    --accent-light: #DAA520;
+    --accent-dark: #8B6914;
+
+    /* ===== 九种体质专属色 ===== */
+    --constitution-balanced: #2E8B57;      /* 平和质 - 翠绿 */
+    --constitution-qi-deficiency: #87CEEB; /* 气虚质 - 天蓝 */
+    --constitution-yang-deficiency: #4169E1; /* 阳虚质 - 皇家蓝 */
+    --constitution-yin-deficiency: #DC143C;  /* 阴虚质 - 深红 */
+    --constitution-phlegm-dampness: #D2691E; /* 痰湿质 - 巧克力 */
+    --constitution-damp-heat: #FF8C00;       /* 湿热质 - 橙色 */
+    --constitution-blood-stasis: #800080;    /* 血瘀质 - 紫色 */
+    --constitution-qi-stagnation: #2F4F4F;   /* 气郁质 - 暗灰 */
+    --constitution-special: #FF69B4;         /* 特禀质 - 粉红 */
+
+    /* ===== 五行配色 ===== */
+    --wood: #228B22;   /* 木 - 森林绿 */
+    --fire: #DC143C;   /* 火 - 深红 */
+    --earth: #DAA520;  /* 土 - 金黄 */
+    --metal: #C0C0C0;  /* 金 - 银色 */
+    --water: #000080;  /* 水 - 深蓝 */
+
+    /* ===== 五味配色 ===== */
+    --flavor-sour: #9ACD32;   /* 酸 - 黄绿 */
+    --flavor-bitter: #8B0000; /* 苦 - 暗红 */
+    --flavor-sweet: #FFD700;  /* 甘 - 金色 */
+    --flavor-spicy: #FF4500;  /* 辛 - 橙红 */
+    --flavor-salty: #4682B4;  /* 咸 - 钢蓝 */
+
+    /* ===== 背景色 - 古典纸张质感 ===== */
+    --bg-paper: #FDF5E6;          /* 古纸米色 */
+    --bg-paper-dark: #F5DEB3;     /* 小麦色 */
+    --bg-parchment: #FAEBD7;      /* 羊皮纸色 */
+    --bg-ink: #1C1C1C;            /* 墨黑 */
+    --bg-card: rgba(255, 250, 240, 0.95);
+
+    /* ===== 功能色 - 寒/热属性 ===== */
+    --cold: #4682B4;              /* 寒性 - 钢蓝 */
+    --cold-light: #87CEEB;
+    --hot: #CD5C5C;               /* 热性 - 印度红 */
+    --hot-light: #F08080;
+    --neutral: #BDB76B;           /* 平性 - 暗卡其 */
+
+    /* ===== 中性色 ===== */
+    --text-primary: #2C1810;      /* 深褐文字 */
+    --text-secondary: #5D4037;    /* 中褐文字 */
+    --text-muted: #8D6E63;        /* 浅褐文字 */
+    --text-light: #A1887F;
+    --border: rgba(139, 69, 19, 0.2);
+    --border-light: rgba(139, 69, 19, 0.1);
+
+    /* ===== 阴影 ===== */
+    --shadow-sm: 0 2px 8px rgba(44, 24, 16, 0.08);
+    --shadow-md: 0 4px 20px rgba(44, 24, 16, 0.12);
+    --shadow-lg: 0 8px 40px rgba(44, 24, 16, 0.16);
+    --shadow-glow: 0 0 20px rgba(184, 134, 11, 0.3);
+
+    /* ===== 动画时间 ===== */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    --transition-slower: 0.8s ease;
+
+    /* ===== 圆角 ===== */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    --radius-full: 9999px;
+
+    /* ===== 字体 ===== */
+    --font-serif: 'Noto Serif SC', 'Songti SC', 'SimSun', serif;
+    --font-sans: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+    /* ===== 间距 ===== */
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+    --space-xl: 32px;
+    --space-2xl: 48px;
+    --space-3xl: 64px;
+}
+
+/* ===== 深色模式支持（可选） ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-paper: #1a1a1a;
+        --bg-paper-dark: #2d2d2d;
+        --bg-parchment: #242424;
+        --bg-card: rgba(30, 30, 30, 0.95);
+        --text-primary: #E8DCC8;
+        --text-secondary: #C4B59D;
+        --text-muted: #9A8B7A;
+        --border: rgba(184, 134, 11, 0.3);
+    }
+}

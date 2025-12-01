@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能体质膳食推荐系统 · 智膳推荐</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <!-- 背景纹理层 -->
+    <div class="bg-texture"></div>
+    <div class="bg-ink-wash"></div>
+
+    <!-- 顶部导航 -->
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">養</span>
+            <span class="logo-text">智能体质膳食推荐系统</span>
+        </div>
+        <nav class="nav">
+            <a href="../../index.html" class="nav-item">体质诊断</a>
+            <a href="../preference-tuner/index.html" class="nav-item">口味调优</a>
+            <a href="./index.html" class="nav-item active">智膳推荐</a>
+        </nav>
+        <div class="header-right">
+            <div class="solar-term">
+                <span class="term-icon">◐</span>
+                <span id="solarTermText">霜降 · 宜温补</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主内容区 -->
+    <main class="main-content">
+        <!-- 顶部状态摘要 -->
+        <section class="status-summary">
+            <div class="summary-item constitution">
+                <span class="summary-icon" id="constitutionIcon">☯</span>
+                <span class="summary-label">体质</span>
+                <span class="summary-value" id="constitutionName">平和质</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-item preferences">
+                <span class="summary-icon">🎯</span>
+                <span class="summary-label">偏好</span>
+                <span class="summary-value" id="preferenceSummary">适中口味</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-item context">
+                <span class="summary-icon">⏰</span>
+                <span class="summary-label">状态</span>
+                <span class="summary-value" id="contextSummary">正常</span>
+            </div>
+            <button class="edit-profile-btn" onclick="window.location.href='../../index.html'">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+                </svg>
+                <span>编辑资料</span>
+            </button>
+        </section>
+
+        <!-- 主体两栏布局 -->
+        <div class="dashboard-grid">
+            <!-- 左侧：菜谱推荐 -->
+            <section class="recipe-section">
+                <!-- 搜索和筛选 -->
+                <div class="search-filter-bar">
+                    <div class="search-box">
+                        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="M21 21l-4.35-4.35" />
+                        </svg>
+                        <input type="text" class="input" placeholder="搜索菜品、食材..." id="searchInput">
+                    </div>
+                    <div class="filter-tabs">
+                        <button class="filter-tab active" data-filter="recommended">为你推荐</button>
+                        <button class="filter-tab" data-filter="warming">温补</button>
+                        <button class="filter-tab" data-filter="cooling">清润</button>
+                        <button class="filter-tab" data-filter="quick">快手菜</button>
+                    </div>
+                </div>
+
+                <!-- 推荐菜谱列表 -->
+                <div class="recipe-list" id="recipeList">
+                    <!-- 加载动画 -->
+                    <div class="loading-skeleton">
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                        <div class="skeleton-card"></div>
+                    </div>
+                </div>
+
+                <!-- 加载更多 -->
+                <button class="load-more-btn" id="loadMoreBtn">
+                    <span>加载更多推荐</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12l7 7 7-7" />
+                    </svg>
+                </button>
+            </section>
+
+            <!-- 右侧：AI 分析面板 -->
+            <aside class="analysis-panel">
+                <!-- AI 洞察卡片 -->
+                <div class="panel-card ai-insights">
+                    <div class="panel-header">
+                        <div class="panel-icon">🧠</div>
+                        <h3>AI 食养洞察</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="insight-content" id="aiInsight">
+                            <p class="insight-greeting">根据您的<strong>平和质</strong>体质，结合当前<strong>霜降</strong>节气，为您精选以下食养方案：
+                            </p>
+                            <ul class="insight-list">
+                                <li><span class="insight-tag warm">宜</span>温补脾胃，可多食山药、红枣、桂圆</li>
+                                <li><span class="insight-tag warm">宜</span>润燥养阴，推荐银耳、百合、雪梨</li>
+                                <li><span class="insight-tag cold">忌</span>生冷寒凉，少食西瓜、苦瓜等</li>
+                            </ul>
+                        </div>
+                        <button class="refresh-insight-btn" id="refreshInsight">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M23 4v6h-6M1 20v-6h6" />
+                                <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" />
+                            </svg>
+                            <span>换一条建议</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 今日食材推荐 -->
+                <div class="panel-card ingredient-recommend">
+                    <div class="panel-header">
+                        <div class="panel-icon">🥬</div>
+                        <h3>当季食材</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="ingredient-grid" id="ingredientGrid">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 五行平衡图 -->
+                <div class="panel-card five-elements">
+                    <div class="panel-header">
+                        <div class="panel-icon">⚖</div>
+                        <h3>今日五味平衡</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="elements-chart">
+                            <div class="element-bar" data-element="sour">
+                                <span class="element-name">酸 · 木</span>
+                                <div class="element-progress">
+                                    <div class="progress-fill" style="width: 60%; --element-color: var(--flavor-sour)">
+                                    </div>
+                                </div>
+                                <span class="element-value">60%</span>
+                            </div>
+                            <div class="element-bar" data-element="bitter">
+                                <span class="element-name">苦 · 火</span>
+                                <div class="element-progress">
+                                    <div class="progress-fill"
+                                        style="width: 40%; --element-color: var(--flavor-bitter)"></div>
+                                </div>
+                                <span class="element-value">40%</span>
+                            </div>
+                            <div class="element-bar" data-element="sweet">
+                                <span class="element-name">甘 · 土</span>
+                                <div class="element-progress">
+                                    <div class="progress-fill" style="width: 75%; --element-color: var(--flavor-sweet)">
+                                    </div>
+                                </div>
+                                <span class="element-value">75%</span>
+                            </div>
+                            <div class="element-bar" data-element="spicy">
+                                <span class="element-name">辛 · 金</span>
+                                <div class="element-progress">
+                                    <div class="progress-fill" style="width: 30%; --element-color: var(--flavor-spicy)">
+                                    </div>
+                                </div>
+                                <span class="element-value">30%</span>
+                            </div>
+                            <div class="element-bar" data-element="salty">
+                                <span class="element-name">咸 · 水</span>
+                                <div class="element-progress">
+                                    <div class="progress-fill" style="width: 50%; --element-color: var(--flavor-salty)">
+                                    </div>
+                                </div>
+                                <span class="element-value">50%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 养生提示 -->
+                <div class="panel-card health-tips">
+                    <div class="panel-header">
+                        <div class="panel-icon">💡</div>
+                        <h3>养生贴士</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="tip-carousel" id="tipCarousel">
+                            <div class="tip-item active">
+                                <p>"霜降时节，天气渐寒，宜早睡早起，避免熬夜损耗阳气。"</p>
+                                <span class="tip-source">— 《黄帝内经》</span>
+                            </div>
+                        </div>
+                        <div class="tip-dots">
+                            <span class="dot active"></span>
+                            <span class="dot"></span>
+                            <span class="dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- 菜谱详情弹窗 -->
+    <div class="modal-overlay" id="recipeModal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+
+            <div class="modal-body">
+                <!-- 菜品图片 -->
+                <div class="recipe-hero">
+                    <div class="recipe-image" id="modalImage">
+                        <div class="image-placeholder">🍲</div>
+                    </div>
+                    <div class="recipe-badges">
+                        <span class="badge-item nature" id="modalNature">温性</span>
+                        <span class="badge-item flavor" id="modalFlavor">甘</span>
+                        <span class="badge-item meridian" id="modalMeridian">入脾</span>
+                    </div>
+                </div>
+
+                <!-- 菜品信息 -->
+                <div class="recipe-info">
+                    <h2 class="recipe-title" id="modalTitle">山药排骨汤</h2>
+                    <p class="recipe-desc" id="modalDesc">补脾养胃，益肺止咳，补肾固精</p>
+
+                    <!-- 匹配度 -->
+                    <div class="match-score">
+                        <div class="score-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="score-bg" cx="50" cy="50" r="45" />
+                                <circle class="score-fill" cx="50" cy="50" r="45" id="scoreCircle" />
+                            </svg>
+                            <span class="score-value" id="modalScore">95</span>
+                        </div>
+                        <div class="score-label">
+                            <span class="label-main">体质匹配度</span>
+                            <span class="label-sub" id="modalMatchReason">非常适合您的阳虚体质</span>
+                        </div>
+                    </div>
+
+                    <!-- 食材列表 -->
+                    <div class="ingredients-section">
+                        <h3>所需食材</h3>
+                        <div class="ingredients-list" id="modalIngredients">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 烹饪步骤 -->
+                    <div class="steps-section">
+                        <h3>烹饪步骤</h3>
+                        <div class="steps-list" id="modalSteps">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+
+                    <!-- 食养分析 -->
+                    <div class="analysis-section">
+                        <h3>食养分析</h3>
+                        <div class="analysis-content" id="modalAnalysis">
+                            <!-- 动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 底部操作 -->
+            <div class="modal-footer">
+                <button class="btn btn-outline" id="addToFavorite">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path
+                            d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                    </svg>
+                    <span>收藏菜谱</span>
+                </button>
+                <button class="btn btn-gold btn-lg" id="startCooking">
+                    <span>开始烹饪</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="5 3 19 12 5 21 5 3" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航（移动端） -->
+    <nav class="mobile-nav">
+        <a href="../../index.html" class="mobile-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>体质</span>
+        </a>
+        <a href="../preference-tuner/index.html" class="mobile-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="3" />
+                <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+            <span>偏好</span>
+        </a>
+        <a href="./index.html" class="mobile-nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" />
+            </svg>
+            <span>推荐</span>
+        </a>
+        <a href="#" class="mobile-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path
+                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+            </svg>
+            <span>收藏</span>
+        </a>
+    </nav>
+
+    <script src="../../assets/js/common.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>

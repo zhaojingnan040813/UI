@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中医九种体质调理系统 · 调理方案</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <style>
+        .main-content {
+            padding: 100px var(--space-xl) var(--space-3xl);
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+        }
+
+        .no-constitution {
+            text-align: center;
+            padding: var(--space-3xl);
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+        }
+
+        .no-constitution-icon {
+            font-size: 4rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .no-constitution h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .no-constitution p {
+            color: var(--text-muted);
+            margin-bottom: var(--space-xl);
+        }
+
+        .plan-container {
+            display: none;
+        }
+
+        .plan-container.active {
+            display: block;
+        }
+
+        .user-constitution {
+            display: flex;
+            align-items: center;
+            gap: var(--space-lg);
+            padding: var(--space-xl);
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-xl);
+        }
+
+        .constitution-icon {
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: var(--radius-lg);
+        }
+
+        .constitution-info h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+        }
+
+        .constitution-info p {
+            color: var(--text-secondary);
+        }
+
+        .plan-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-lg);
+        }
+
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+            padding-bottom: var(--space-sm);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+        }
+
+        .section-title .icon {
+            font-size: 1.3rem;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .food-group h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .food-group.suitable h4 {
+            color: #2E8B57;
+        }
+
+        .food-group.avoid h4 {
+            color: #DC143C;
+        }
+
+        .food-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+
+        .food-tag {
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 0.85rem;
+        }
+
+        .food-group.suitable .food-tag {
+            background: rgba(46, 139, 87, 0.1);
+            color: #2E8B57;
+        }
+
+        .food-group.avoid .food-tag {
+            background: rgba(220, 20, 60, 0.1);
+            color: #DC143C;
+        }
+
+        .lifestyle-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .lifestyle-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-sm);
+            background: var(--bg-paper);
+            border-radius: var(--radius-md);
+        }
+
+        .lifestyle-item .check {
+            color: #2E8B57;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-texture"></div>
+    <div class="bg-ink-wash"></div>
+
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">體</span>
+            <span class="logo-text">中医九种体质调理系统</span>
+        </div>
+        <nav class="nav">
+            <a href="../../index.html" class="nav-item">体质辨识</a>
+            <a href="../knowledge-graph/index.html" class="nav-item">知识图谱</a>
+            <a href="../constitution-detail/index.html" class="nav-item">体质百科</a>
+            <a href="./index.html" class="nav-item active">调理方案</a>
+        </nav>
+        <div class="header-right">
+            <span class="solar-term">
+                <span class="term-icon">◐</span>
+                <span id="solarTermText">大雪 · 宜温补</span>
+            </span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">个性化调理方案</h1>
+            <p class="page-subtitle">根据您的体质类型，定制专属调理建议</p>
+        </div>
+
+        <div class="no-constitution" id="noConstitution">
+            <div class="no-constitution-icon">☯</div>
+            <h2>尚未确定体质类型</h2>
+            <p>请先完成体质辨识，我们将为您生成个性化调理方案</p>
+            <a href="../../index.html" class="btn btn-gold">开始体质辨识</a>
+        </div>
+
+        <div class="plan-container" id="planContainer">
+            <div class="user-constitution">
+                <div class="constitution-icon" id="userIcon">☯</div>
+                <div class="constitution-info">
+                    <h2 id="userName">平和质</h2>
+                    <p id="userDesc">阴阳调和，气血充盈</p>
+                </div>
+                <a href="../../index.html" class="btn btn-outline" style="margin-left: auto;">重新辨识</a>
+            </div>
+
+            <div class="plan-section">
+                <h3 class="section-title">
+                    <span class="icon">🍽</span>
+                    饮食调理
+                </h3>
+                <div class="food-grid">
+                    <div class="food-group suitable">
+                        <h4>✓ 宜食</h4>
+                        <div class="food-tags" id="suitableFoods"></div>
+                    </div>
+                    <div class="food-group avoid">
+                        <h4>✕ 忌食</h4>
+                        <div class="food-tags" id="avoidFoods"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="plan-section">
+                <h3 class="section-title">
+                    <span class="icon">🏃</span>
+                    起居调养
+                </h3>
+                <div class="lifestyle-list" id="lifestyleList"></div>
+            </div>
+
+            <div class="plan-section">
+                <h3 class="section-title">
+                    <span class="icon">📋</span>
+                    形成原因
+                </h3>
+                <div class="lifestyle-list" id="causesList"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const constitution = TCM.getUserConstitution();
+
+            if (constitution) {
+                document.getElementById('noConstitution').style.display = 'none';
+                document.getElementById('planContainer').classList.add('active');
+                renderPlan(constitution);
+            }
+        });
+
+        function renderPlan(data) {
+            document.getElementById('userIcon').textContent = data.icon;
+            document.getElementById('userName').textContent = data.name;
+            document.getElementById('userDesc').textContent = data.description;
+
+            document.getElementById('suitableFoods').innerHTML =
+                data.diet.suitable.map(f => `<span class="food-tag">${f}</span>`).join('');
+
+            document.getElementById('avoidFoods').innerHTML =
+                data.diet.avoid.map(f => `<span class="food-tag">${f}</span>`).join('');
+
+            document.getElementById('lifestyleList').innerHTML =
+                data.lifestyle.map(l => `
+                    <div class="lifestyle-item">
+                        <span class="check">✓</span>
+                        <span>${l}</span>
+                    </div>
+                `).join('');
+
+            document.getElementById('causesList').innerHTML =
+                data.causes.map(c => `
+                    <div class="lifestyle-item">
+                        <span>•</span>
+                        <span>${c}</span>
+                    </div>
+                `).join('');
+        }
+    </script>
+</body>
+
+</html>

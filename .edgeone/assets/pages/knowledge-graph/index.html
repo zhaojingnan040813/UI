@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中医九种体质调理系统 · 膳食知识图谱</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="bg-texture"></div>
+    <div class="bg-ink-wash"></div>
+
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">體</span>
+            <span class="logo-text">中医九种体质调理系统</span>
+        </div>
+        <nav class="nav">
+            <a href="../../index.html" class="nav-item">体质辨识</a>
+            <a href="./index.html" class="nav-item active">知识图谱</a>
+            <a href="../constitution-detail/index.html" class="nav-item">体质百科</a>
+            <a href="../health-plan/index.html" class="nav-item">调理方案</a>
+        </nav>
+        <div class="header-right">
+            <span class="solar-term">
+                <span class="term-icon">◐</span>
+                <span id="solarTermText">大雪 · 宜温补</span>
+            </span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">膳食知识图谱</h1>
+            <p class="page-subtitle">Knowledge Graph · 探索体质与食材的关联关系</p>
+        </div>
+
+        <div class="graph-container">
+            <aside class="graph-sidebar">
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">图谱筛选</h3>
+                    <div class="filter-group">
+                        <label class="filter-label">节点类型</label>
+                        <div class="filter-checkboxes">
+                            <label class="checkbox-item">
+                                <input type="checkbox" checked data-filter="constitution">
+                                <span class="checkbox-icon constitution"></span>
+                                <span>体质</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" checked data-filter="food">
+                                <span class="checkbox-icon food"></span>
+                                <span>食材</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" checked data-filter="symptom">
+                                <span class="checkbox-icon symptom"></span>
+                                <span>症状</span>
+                            </label>
+                            <label class="checkbox-item">
+                                <input type="checkbox" checked data-filter="meridian">
+                                <span class="checkbox-icon meridian"></span>
+                                <span>经络</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">体质类型</label>
+                        <div class="constitution-filters">
+                            <button class="constitution-filter active" data-type="all">全部</button>
+                            <button class="constitution-filter" data-type="balanced">平和质</button>
+                            <button class="constitution-filter" data-type="qi-deficiency">气虚质</button>
+                            <button class="constitution-filter" data-type="yang-deficiency">阳虚质</button>
+                            <button class="constitution-filter" data-type="yin-deficiency">阴虚质</button>
+                            <button class="constitution-filter" data-type="phlegm-dampness">痰湿质</button>
+                            <button class="constitution-filter" data-type="damp-heat">湿热质</button>
+                            <button class="constitution-filter" data-type="blood-stasis">血瘀质</button>
+                            <button class="constitution-filter" data-type="qi-stagnation">气郁质</button>
+                            <button class="constitution-filter" data-type="special">特禀质</button>
+                        </div>
+                    </div>
+
+                    <div class="filter-group">
+                        <label class="filter-label">食材属性</label>
+                        <div class="property-filters">
+                            <button class="property-filter" data-property="hot">
+                                <span class="property-dot hot"></span>
+                                热性
+                            </button>
+                            <button class="property-filter" data-property="warm">
+                                <span class="property-dot warm"></span>
+                                温性
+                            </button>
+                            <button class="property-filter" data-property="neutral">
+                                <span class="property-dot neutral"></span>
+                                平性
+                            </button>
+                            <button class="property-filter" data-property="cool">
+                                <span class="property-dot cool"></span>
+                                凉性
+                            </button>
+                            <button class="property-filter" data-property="cold">
+                                <span class="property-dot cold"></span>
+                                寒性
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">搜索</h3>
+                    <div class="search-box">
+                        <input type="text" class="input" placeholder="搜索体质、食材、症状..." id="graphSearch">
+                        <button class="search-btn" id="searchBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="search-suggestions" id="searchSuggestions">
+                    </div>
+                </div>
+
+                <div class="sidebar-section">
+                    <h3 class="sidebar-title">图例</h3>
+                    <div class="legend-list">
+                        <div class="legend-item">
+                            <span class="legend-node constitution"></span>
+                            <span>体质类型</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-node food"></span>
+                            <span>食材</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-node symptom"></span>
+                            <span>症状表现</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-node meridian"></span>
+                            <span>归经</span>
+                        </div>
+                        <div class="legend-divider"></div>
+                        <div class="legend-item">
+                            <span class="legend-line suitable"></span>
+                            <span>适宜关系</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-line avoid"></span>
+                            <span>忌用关系</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-line related"></span>
+                            <span>关联关系</span>
+                        </div>
+                    </div>
+                </div>
+            </aside>
+
+            <div class="graph-main">
+                <div class="graph-toolbar">
+                    <div class="toolbar-left">
+                        <button class="toolbar-btn" id="zoomIn" title="放大">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35M11 8v6M8 11h6" />
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="zoomOut" title="缩小">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <circle cx="11" cy="11" r="8" />
+                                <path d="M21 21l-4.35-4.35M8 11h6" />
+                            </svg>
+                        </button>
+                        <button class="toolbar-btn" id="resetView" title="重置视图">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+                                <path d="M3 3v5h5" />
+                            </svg>
+                        </button>
+                        <span class="toolbar-divider"></span>
+                        <button class="toolbar-btn" id="toggleLabels" title="显示/隐藏标签">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M4 7V4h16v3M9 20h6M12 4v16" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="toolbar-right">
+                        <span class="node-count" id="nodeCount">节点: 0</span>
+                        <span class="edge-count" id="edgeCount">关系: 0</span>
+                    </div>
+                </div>
+
+                <div class="graph-canvas" id="graphCanvas">
+                    <div class="graph-loading" id="graphLoading">
+                        <div class="loading-spinner"></div>
+                        <p>正在加载知识图谱...</p>
+                    </div>
+                    <svg id="graphSvg" width="100%" height="100%">
+                        <defs>
+                            <marker id="arrowhead-suitable" markerWidth="10" markerHeight="7" refX="10" refY="3.5"
+                                orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#2E8B57" />
+                            </marker>
+                            <marker id="arrowhead-avoid" markerWidth="10" markerHeight="7" refX="10" refY="3.5"
+                                orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#DC143C" />
+                            </marker>
+                            <marker id="arrowhead-related" markerWidth="10" markerHeight="7" refX="10" refY="3.5"
+                                orient="auto">
+                                <polygon points="0 0, 10 3.5, 0 7" fill="#B8860B" />
+                            </marker>
+                        </defs>
+                        <g class="graph-links"></g>
+                        <g class="graph-nodes"></g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-panel" id="detailPanel">
+            <button class="panel-close" id="closeDetail">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="panel-content" id="detailContent">
+            </div>
+        </div>
+    </main>
+
+    <nav class="mobile-nav">
+        <a href="../../index.html" class="mobile-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span>辨识</span>
+        </a>
+        <a href="./index.html" class="mobile-nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                <path d="M2 12h20" />
+            </svg>
+            <span>图谱</span>
+        </a>
+        <a href="../constitution-detail/index.html" class="mobile-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+            <span>百科</span>
+        </a>
+        <a href="../health-plan/index.html" class="mobile-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
+            </svg>
+            <span>方案</span>
+        </a>
+    </nav>
+
+    <script src="../../assets/js/common.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
