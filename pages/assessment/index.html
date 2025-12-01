@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中医九种体质调理系统 · 体质辨识</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <style>
+        .main-content {
+            padding: 100px var(--space-xl) var(--space-3xl);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--border-light);
+            border-radius: var(--radius-full);
+            margin-bottom: var(--space-xl);
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: var(--radius-full);
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: var(--space-lg);
+        }
+
+        .question-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-lg);
+        }
+
+        .question-number {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+            margin-bottom: var(--space-sm);
+        }
+
+        .question-text {
+            font-family: var(--font-serif);
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            line-height: 1.6;
+        }
+
+        .options-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .option-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-paper);
+            border: 2px solid transparent;
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+
+        .option-item:hover {
+            background: rgba(139, 69, 19, 0.05);
+            border-color: var(--border);
+        }
+
+        .option-item.selected {
+            background: rgba(139, 69, 19, 0.1);
+            border-color: var(--primary);
+        }
+
+        .option-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .option-item.selected .option-radio {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        .option-item.selected .option-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .option-text {
+            flex: 1;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .option-score {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--bg-paper);
+            padding: 2px 8px;
+            border-radius: var(--radius-full);
+        }
+
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-md);
+            margin-top: var(--space-xl);
+        }
+
+        .result-container {
+            display: none;
+            text-align: center;
+        }
+
+        .result-container.active {
+            display: block;
+        }
+
+        .result-icon {
+            font-size: 5rem;
+            margin-bottom: var(--space-lg);
+        }
+
+        .result-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .result-desc {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xl);
+        }
+
+        .result-traits {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-xl);
+        }
+
+        .result-trait {
+            padding: 8px 16px;
+            background: rgba(139, 69, 19, 0.1);
+            border-radius: var(--radius-full);
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .result-actions {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-md);
+        }
+
+        .assessment-container {
+            display: block;
+        }
+
+        .assessment-container.hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-texture"></div>
+    <div class="bg-ink-wash"></div>
+
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">體</span>
+            <span class="logo-text">中医九种体质调理系统</span>
+        </div>
+        <nav class="nav">
+            <a href="../../index.html" class="nav-item">体质辨识</a>
+            <a href="../knowledge-graph/index.html" class="nav-item">知识图谱</a>
+            <a href="../constitution-detail/index.html" class="nav-item">体质百科</a>
+            <a href="../health-plan/index.html" class="nav-item">调理方案</a>
+        </nav>
+        <div class="header-right">
+            <span class="solar-term">
+                <span class="term-icon">◐</span>
+                <span id="solarTermText">大雪 · 宜温补</span>
+            </span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="assessment-container" id="assessmentContainer">
+            <div class="page-header">
+                <h1 class="page-title">体质辨识问卷</h1>
+                <p class="page-subtitle">请根据您近一年的实际情况作答</p>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div class="progress-text" id="progressText">问题 1 / 9</div>
+
+            <div class="question-card" id="questionCard">
+                <div class="question-number" id="questionNumber">问题 1</div>
+                <div class="question-text" id="questionText">您是否容易感到疲劳、乏力？</div>
+                <div class="options-list" id="optionsList"></div>
+            </div>
+
+            <div class="nav-buttons">
+                <button class="btn btn-outline" id="prevBtn" disabled>上一题</button>
+                <button class="btn btn-gold" id="nextBtn">下一题</button>
+            </div>
+        </div>
+
+        <div class="result-container" id="resultContainer">
+            <div class="result-icon" id="resultIcon">☯</div>
+            <h2 class="result-title" id="resultTitle">平和质</h2>
+            <p class="result-desc" id="resultDesc">阴阳调和，气血充盈</p>
+            <div class="result-traits" id="resultTraits"></div>
+            <div class="result-actions">
+                <a href="../health-plan/index.html" class="btn btn-gold">查看调理方案</a>
+                <button class="btn btn-outline" id="restartBtn">重新测试</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="../../assets/js/common.js"></script>
+    <script>
+        const questions = [
+            {
+                id: 1,
+                text: '您是否容易感到疲劳、乏力？',
+                type: 'qi-deficiency',
+                options: [
+                    { text: '没有（从不）', score: 1 },
+                    { text: '很少（偶尔）', score: 2 },
+                    { text: '有时', score: 3 },
+                    { text: '经常', score: 4 },
+                    { text: '总是', score: 5 }
+                ]
+            },
+            {
+                id: 2,
+                text: '您是否手脚发凉、怕冷？',
+                type: 'yang-deficiency',
+                options: [
+                    { text: '没有', score: 1 },
+                    { text: '很少', score: 2 },
+                    { text: '有时', score: 3 },
+                    { text: '经常', score: 4 },
+                    { text: '总是', score: 5 }
+                ]
+            },
+            {
+                id: 3,
+                text: '您是否感到口干舌燥、皮肤干燥？',
+                type: 'yin-deficiency',
+                options: [
+                    { text: '没有', score: 1 },
+                    { text: '很少', score: 2 },
+                    { text: '有时', score: 3 },
+                    { text: '经常', score: 4 },
+                    { text: '总是', score: 5 }
+                ]
+            },
+            {
+                id: 4,
+                text: '您的体型是否偏胖、腹部肥满松软？',
+                type: 'phlegm-dampness',
+                options: [
+                    { text: '没有', score: 1 },
+                    { text: '有点', score: 2 },
+                    { text: '比较明显', score: 3 },
+                    { text: '明显', score: 4 },
+                    { text: '非常明显', score: 5 }
+                ]
+            },
+            {
+                id: 5,
+                text: '您是否面部油腻、容易生痘？',
+                type: 'damp-heat',
+                options: [
+                    { text: '没有', score: 1 },
+                    { text: '很少', score: 2 },
+                    { text: '有时', score: 3 },
+                    { text: '经常', score: 4 },
+                    { text: '总是', score: 5 }
+                ]
+            },
+            {
+                id: 6,
+                text: '您的皮肤是否容易出现淤青或色斑？',
+                type: 'blood-stasis',
+                options: [
+                    { text: '没有', score: 1 },
+                    { text: '很少', score: 2 },
+                    { text: '有时', score: 3 },
+                    { text: '经常', score: 4 },
+                    { text: '总是', score: 5 }
+                ]
+            },
+            {
+                id: 7,
+                text: '您是否容易情绪低落、多愁善感？',
+                type: 'qi-stagnation',
+                options: [
+                    { text: '没有', score: 1 },
+                    { text: '很少', score: 2 },
+                    { text: '有时', score: 3 },
+                    { text: '经常', score: 4 },
+                    { text: '总是', score: 5 }
+                ]
+            },
+            {
+                id: 8,
+                text: '您是否容易过敏（药物、食物、花粉等）？',
+                type: 'special',
+                options: [
+                    { text: '没有', score: 1 },
+                    { text: '很少', score: 2 },
+                    { text: '有时', score: 3 },
+                    { text: '经常', score: 4 },
+                    { text: '总是', score: 5 }
+                ]
+            },
+            {
+                id: 9,
+                text: '您的精神状态如何？',
+                type: 'balanced',
+                options: [
+                    { text: '精力充沛', score: 5 },
+                    { text: '比较好', score: 4 },
+                    { text: '一般', score: 3 },
+                    { text: '较差', score: 2 },
+                    { text: '很差', score: 1 }
+                ]
+            }
+        ];
+
+        let currentIndex = 0;
+        let answers = {};
+
+        document.addEventListener('DOMContentLoaded', function () {
+            renderQuestion();
+            setupEventListeners();
+        });
+
+        function renderQuestion() {
+            const question = questions[currentIndex];
+            const total = questions.length;
+            const progress = ((currentIndex + 1) / total) * 100;
+
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `问题 ${currentIndex + 1} / ${total}`;
+            document.getElementById('questionNumber').textContent = `问题 ${currentIndex + 1}`;
+            document.getElementById('questionText').textContent = question.text;
+
+            const optionsList = document.getElementById('optionsList');
+            optionsList.innerHTML = question.options.map((opt, i) => `
+                <div class="option-item ${answers[question.id] === i ? 'selected' : ''}" data-index="${i}">
+                    <div class="option-radio"></div>
+                    <span class="option-text">${opt.text}</span>
+                </div>
+            `).join('');
+
+            optionsList.querySelectorAll('.option-item').forEach(item => {
+                item.addEventListener('click', () => selectOption(parseInt(item.dataset.index)));
+            });
+
+            document.getElementById('prevBtn').disabled = currentIndex === 0;
+            document.getElementById('nextBtn').textContent = currentIndex === total - 1 ? '查看结果' : '下一题';
+        }
+
+        function selectOption(index) {
+            const question = questions[currentIndex];
+            answers[question.id] = index;
+            renderQuestion();
+        }
+
+        function setupEventListeners() {
+            document.getElementById('prevBtn').addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                    renderQuestion();
+                }
+            });
+
+            document.getElementById('nextBtn').addEventListener('click', () => {
+                const question = questions[currentIndex];
+                if (answers[question.id] === undefined) {
+                    TCM.showToast('请选择一个选项');
+                    return;
+                }
+
+                if (currentIndex < questions.length - 1) {
+                    currentIndex++;
+                    renderQuestion();
+                } else {
+                    showResult();
+                }
+            });
+
+            document.getElementById('restartBtn').addEventListener('click', () => {
+                currentIndex = 0;
+                answers = {};
+                document.getElementById('assessmentContainer').classList.remove('hidden');
+                document.getElementById('resultContainer').classList.remove('active');
+                renderQuestion();
+            });
+        }
+
+        function showResult() {
+            const scores = {};
+
+            questions.forEach(q => {
+                const answerIndex = answers[q.id];
+                if (answerIndex !== undefined) {
+                    const score = q.options[answerIndex].score;
+                    scores[q.type] = (scores[q.type] || 0) + score;
+                }
+            });
+
+            let maxType = 'balanced';
+            let maxScore = 0;
+
+            Object.entries(scores).forEach(([type, score]) => {
+                if (type !== 'balanced' && score > maxScore) {
+                    maxScore = score;
+                    maxType = type;
+                }
+            });
+
+            if (scores['balanced'] >= 4 && maxScore <= 3) {
+                maxType = 'balanced';
+            }
+
+            const result = TCM.CONSTITUTION_DATA[maxType];
+            TCM.setUserConstitution(maxType);
+
+            document.getElementById('resultIcon').textContent = result.icon;
+            document.getElementById('resultTitle').textContent = result.name;
+            document.getElementById('resultDesc').textContent = result.fullDescription;
+            document.getElementById('resultTraits').innerHTML =
+                result.traits.map(t => `<span class="result-trait">${t}</span>`).join('');
+
+            document.getElementById('assessmentContainer').classList.add('hidden');
+            document.getElementById('resultContainer').classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

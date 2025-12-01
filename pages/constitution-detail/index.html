@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中医九种体质调理系统 · 体质百科</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/components.css">
+    <style>
+        .main-content {
+            padding: 100px var(--space-xl) var(--space-3xl);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: var(--space-2xl);
+        }
+
+        .page-title {
+            font-family: var(--font-serif);
+            font-size: 2.5rem;
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+        }
+
+        .page-subtitle {
+            color: var(--text-muted);
+        }
+
+        .constitution-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .constitution-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-xl);
+            padding: var(--space-xl);
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+
+        .constitution-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        .item-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+
+        .item-icon {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            background: rgba(139, 69, 19, 0.08);
+            border-radius: var(--radius-lg);
+        }
+
+        .item-name {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .item-desc {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .item-content p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-md);
+        }
+
+        .item-traits {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+
+        .trait-tag {
+            padding: 4px 12px;
+            background: rgba(139, 69, 19, 0.06);
+            border-radius: var(--radius-full);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-texture"></div>
+    <div class="bg-ink-wash"></div>
+
+    <header class="header">
+        <div class="logo">
+            <span class="logo-icon">體</span>
+            <span class="logo-text">中医九种体质调理系统</span>
+        </div>
+        <nav class="nav">
+            <a href="../../index.html" class="nav-item">体质辨识</a>
+            <a href="../knowledge-graph/index.html" class="nav-item">知识图谱</a>
+            <a href="./index.html" class="nav-item active">体质百科</a>
+            <a href="../health-plan/index.html" class="nav-item">调理方案</a>
+        </nav>
+        <div class="header-right">
+            <span class="solar-term">
+                <span class="term-icon">◐</span>
+                <span id="solarTermText">大雪 · 宜温补</span>
+            </span>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="page-header">
+            <h1 class="page-title">体质百科</h1>
+            <p class="page-subtitle">了解九种体质的特征、成因与调理方法</p>
+        </div>
+
+        <div class="constitution-list" id="constitutionList">
+        </div>
+    </main>
+
+    <script src="../../assets/js/common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            renderConstitutionList();
+        });
+
+        function renderConstitutionList() {
+            const list = document.getElementById('constitutionList');
+            const data = TCM.CONSTITUTION_DATA;
+
+            list.innerHTML = Object.values(data).map(item => `
+                <div class="constitution-item" data-type="${item.id}">
+                    <div class="item-header">
+                        <div class="item-icon">${item.icon}</div>
+                        <div>
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-desc">${item.description}</div>
+                        </div>
+                    </div>
+                    <div class="item-content">
+                        <p>${item.fullDescription}</p>
+                        <div class="item-traits">
+                            ${item.traits.map(t => `<span class="trait-tag">${t}</span>`).join('')}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            list.querySelectorAll('.constitution-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    TCM.showToast('详情页面开发中...');
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>
