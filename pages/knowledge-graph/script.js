@@ -131,6 +131,9 @@ let currentFilter = { type: 'all', property: null };
 let showLabels = true;
 
 function initKnowledgeGraph() {
+    const canvas = document.getElementById('graphCanvas');
+    if (!canvas) return;
+
     setupSvg();
     setupSimulation();
     renderGraph();
@@ -139,7 +142,10 @@ function initKnowledgeGraph() {
     setupDetailPanel();
     setupSearch();
 
-    document.getElementById('graphLoading').classList.add('hidden');
+    const graphLoading = document.getElementById('graphLoading');
+    if (graphLoading) {
+        graphLoading.classList.add('hidden');
+    }
 }
 
 function setupSvg() {
@@ -513,24 +519,37 @@ function applyFilters() {
 }
 
 function setupToolbar() {
-    document.getElementById('zoomIn').addEventListener('click', () => {
-        zoomGraph(1.2);
-    });
+    const zoomInBtn = document.getElementById('zoomIn');
+    const zoomOutBtn = document.getElementById('zoomOut');
+    const resetViewBtn = document.getElementById('resetView');
+    const toggleLabelsBtn = document.getElementById('toggleLabels');
 
-    document.getElementById('zoomOut').addEventListener('click', () => {
-        zoomGraph(0.8);
-    });
+    if (zoomInBtn) {
+        zoomInBtn.addEventListener('click', () => {
+            zoomGraph(1.2);
+        });
+    }
 
-    document.getElementById('resetView').addEventListener('click', () => {
-        setupSimulation();
-        renderGraph();
-    });
+    if (zoomOutBtn) {
+        zoomOutBtn.addEventListener('click', () => {
+            zoomGraph(0.8);
+        });
+    }
 
-    document.getElementById('toggleLabels').addEventListener('click', (e) => {
-        showLabels = !showLabels;
-        e.target.closest('.toolbar-btn').classList.toggle('active', showLabels);
-        renderNodes();
-    });
+    if (resetViewBtn) {
+        resetViewBtn.addEventListener('click', () => {
+            setupSimulation();
+            renderGraph();
+        });
+    }
+
+    if (toggleLabelsBtn) {
+        toggleLabelsBtn.addEventListener('click', (e) => {
+            showLabels = !showLabels;
+            e.target.closest('.toolbar-btn').classList.toggle('active', showLabels);
+            renderNodes();
+        });
+    }
 }
 
 function zoomGraph(factor) {
@@ -547,14 +566,22 @@ function zoomGraph(factor) {
 }
 
 function setupDetailPanel() {
-    document.getElementById('closeDetail').addEventListener('click', () => {
-        document.getElementById('detailPanel').classList.remove('active');
-    });
+    const closeDetailBtn = document.getElementById('closeDetail');
+    if (closeDetailBtn) {
+        closeDetailBtn.addEventListener('click', () => {
+            const detailPanel = document.getElementById('detailPanel');
+            if (detailPanel) {
+                detailPanel.classList.remove('active');
+            }
+        });
+    }
 }
 
 function setupSearch() {
     const searchInput = document.getElementById('graphSearch');
     const suggestions = document.getElementById('searchSuggestions');
+
+    if (!searchInput || !suggestions) return;
 
     searchInput.addEventListener('input', TCM.debounce((e) => {
         const query = e.target.value.trim().toLowerCase();
